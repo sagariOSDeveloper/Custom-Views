@@ -11,15 +11,18 @@ import UIKit
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
-//        customButton.addButton(controllerView: self.view, title: "New Button 23")
-        AlertBox.shared.textHead = "Accessing Internal Storage"
-        AlertBox.shared.subText = "Application needs to access internal storage to gain folder names"
-        AlertBox.shared.button1Text = "Skip This"
-        AlertBox.shared.button2Text = "Don't Skip"
-        AlertBox.shared.showAlertBox(controllerView: self.view)
-        DispatchQueue.main.asyncAfter(deadline: .now()+3){
-        AlertBox.shared.removeAlertBox()
+        super.viewDidLoad()
+        AlertBox.shared.enableAlertBox(controllerView: self.view)
+        AlertBox.shared.addButton(title: "Allow") {
+            self.present(customButton(), animated: true, completion: nil)
+            print("Permission Granted")
+            AlertBox.shared.removeAlertBox()
+            AlertBox.shared = nil
+        }
+        AlertBox.shared.addLabel(text: "Permission Needed...!", fontSize: .large)
+        AlertBox.shared.addLabel(text: "This app need permission to access your contacts", fontSize: .medium)
+        AlertBox.shared.addButton(title: "Don't Allow") {
+            print("Permission Not Granted")
         }
     }
 }

@@ -10,21 +10,26 @@ import Foundation
 import UIKit
 
 class AlertBox {
-    static var shared = AlertBox()
+    
+    static var shared:AlertBox! = AlertBox()
     private init(){}
-    var textHead:String = "Title Head"
-    var subText:String = "Title"
-    var button1Text:String = "Allow"
-    var button2Text:String = "Don't Allow"
     fileprivate var stackView = UIStackView()
     
-    func showAlertBox(controllerView: UIView? = nil){
-    guard let mainView:UIView = UIApplication.shared.keyWindow ?? controllerView else {return}
-    setStackView(controllerView: mainView)
-    addSubViews()
+    func enableAlertBox(controllerView: UIView? = nil){
+        guard let mainView:UIView = UIApplication.shared.keyWindow ?? controllerView else {return}
+        mainView.addSubview(stackView)
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
+        addStackBackground()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.centerYAnchor.constraint(equalTo: mainView.centerYAnchor).isActive = true
+        stackView.leftAnchor.constraint(equalTo: mainView.leftAnchor,constant: 20).isActive = true
+        stackView.rightAnchor.constraint(equalTo: mainView.rightAnchor,constant: -20).isActive = true
     }
     
-//    Setting up Stack View
+    //    Setting up Stack View
     
     fileprivate func setStackView(controllerView: UIView?){
         controllerView?.addSubview(stackView)
@@ -32,65 +37,81 @@ class AlertBox {
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.spacing = 10
-        stackView.backgroundColor = .blue
+        addStackBackground()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.centerYAnchor.constraint(equalTo: controllerView!.centerYAnchor).isActive = true
         stackView.leftAnchor.constraint(equalTo: controllerView!.leftAnchor,constant: 20).isActive = true
         stackView.rightAnchor.constraint(equalTo: controllerView!.rightAnchor,constant: -20).isActive = true
     }
     
-//    Adding Sub Views
-    fileprivate func addSubViews(){
-        stackView.addArrangedSubview(labelHead)
-        stackView.addArrangedSubview(labelTitle)
-        stackView.addArrangedSubview(bt)
-        bt.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        stackView.addArrangedSubview(bt2)
+    func addLabel(text:String , fontSize: fontSize){
+        let label = UILabel()
+        label.text = text
+        label.textAlignment = .center
+        label.textColor = .white
+        //        label.backgroundColor = .red
+        //        label.layer.cornerRadius = 20
+        //        label.layer.masksToBounds = true
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: CGFloat(fontSize.rawValue))
+        stackView.addArrangedSubview(label)
     }
     
-//    Buttons
-    
-    fileprivate lazy var bt: UIButton = {
-        return returnButton(title: button1Text)
-    }()
-    
-    fileprivate lazy var bt2: UIButton = {
-        return returnButton(title: button2Text)
-    }()
-    
-//    Label
-    
-    fileprivate lazy var labelHead:UILabel = {
-        return returnLabel(font: .boldSystemFont(ofSize: 18), text: textHead)
-    }()
-    
-    fileprivate lazy var labelTitle:UILabel = {
-        return returnLabel(font: .systemFont(ofSize: 14), text: subText)
-    }()
-    
-//    func removeAlertBox(controllerView: UIView? = nil){
-//        guard let mainView:UIView = UIApplication.shared.keyWindow ?? controllerView else {return}
-//        stackView.removeFromSuperview()
-//    }
-    func removeAlertBox(){
-        stackView.removeFromSuperview()
-    }
-    func returnButton(title:String)->UIButton{
-        let bt = UIButton()
+    func addButton(title:String, completion:@escaping()-> Void){
+        let bt = Button()
         bt.layer.cornerRadius = 20
         bt.setTitle(title, for: .normal)
         bt.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         bt.titleLabel?.font = .boldSystemFont(ofSize: 18)
         bt.layer.borderWidth = 3
         bt.layer.borderColor = UIColor.red.cgColor
-        return bt
+        bt.action = {
+            completion()
+        }
+        stackView.addArrangedSubview(bt)
+        bt.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
-    func returnLabel(font: UIFont, text:String)->UILabel{
-        let labl = UILabel()
-               labl.text = text
-               labl.textAlignment = .center
-               labl.numberOfLines = 0
-               labl.font = font
-               return labl
+    
+    fileprivate func addStackBackground(){
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.gray
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.layer.cornerRadius = 20
+        stackView.insertSubview(backgroundView, at: 0)
+        backgroundView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
+        backgroundView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+        backgroundView.topAnchor.constraint(equalTo: stackView.topAnchor).isActive = true
+        backgroundView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor).isActive = true
+    }
+    
+    func removeAlertBox(){
+        stackView.removeFromSuperview()
+    }
+}
+
+enum fontSize:Int{
+    case small = 14
+    case medium = 16
+    case large = 20
+}
+
+class Button: UIButton {
+    var action:(()->Void)?
+    
+    override init(frame: CGRect) {
+        super .init(frame:frame)
+        print("Button Initialized")
+        self.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+    }
+    @objc func buttonPressed() {
+        action?()
+    }
+    required init?(coder: NSCoder) {
+        super .init(coder:coder)
+        print("Button Initialized")
+        
+    }
+    deinit {
+        print("Button deinitialized")
     }
 }
