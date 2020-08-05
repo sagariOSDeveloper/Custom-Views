@@ -13,6 +13,9 @@
 		132A598324D9469500D4D072 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 132A598124D9469500D4D072 /* Main.storyboard */; };
 		132A598524D9469700D4D072 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 132A598424D9469700D4D072 /* Assets.xcassets */; };
 		132A598824D9469700D4D072 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 132A598624D9469700D4D072 /* LaunchScreen.storyboard */; };
+		132A599024D946A500D4D072 /* Loading View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132A598F24D946A500D4D072 /* Loading View.swift */; };
+		1399A3C724DAEE4400943AE8 /* AlertBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1399A3C624DAEE4400943AE8 /* AlertBox.swift */; };
+		13DF080024D99AC90092A07D /* customButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DF07FF24D99AC90092A07D /* customButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		132A598424D9469700D4D072 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		132A598724D9469700D4D072 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		132A598924D9469700D4D072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		132A598F24D946A500D4D072 /* Loading View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Loading View.swift"; sourceTree = "<group>"; };
+		1399A3C624DAEE4400943AE8 /* AlertBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBox.swift; sourceTree = "<group>"; };
+		13DF07FF24D99AC90092A07D /* customButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +64,11 @@
 			children = (
 				132A597B24D9469500D4D072 /* AppDelegate.swift */,
 				132A597D24D9469500D4D072 /* SceneDelegate.swift */,
-				132A597F24D9469500D4D072 /* ViewController.swift */,
 				132A598124D9469500D4D072 /* Main.storyboard */,
+				132A597F24D9469500D4D072 /* ViewController.swift */,
+				1399A3C624DAEE4400943AE8 /* AlertBox.swift */,
+				132A598F24D946A500D4D072 /* Loading View.swift */,
+				13DF07FF24D99AC90092A07D /* customButton.swift */,
 				132A598424D9469700D4D072 /* Assets.xcassets */,
 				132A598624D9469700D4D072 /* LaunchScreen.storyboard */,
 				132A598924D9469700D4D072 /* Info.plist */,
@@ -138,8 +147,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13DF080024D99AC90092A07D /* customButton.swift in Sources */,
 				132A598024D9469500D4D072 /* ViewController.swift in Sources */,
+				1399A3C724DAEE4400943AE8 /* AlertBox.swift in Sources */,
 				132A597C24D9469500D4D072 /* AppDelegate.swift in Sources */,
+				132A599024D946A500D4D072 /* Loading View.swift in Sources */,
 				132A597E24D9469500D4D072 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,6 +299,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8U42264JWC;
 				INFOPLIST_FILE = "Custom Views/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,6 +318,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8U42264JWC;
 				INFOPLIST_FILE = "Custom Views/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
