@@ -12,11 +12,15 @@ import UIKit
 class AlertBox {
     
     static var shared:AlertBox! = AlertBox()
-    private init(){}
+    
+    private init(){
+        
+    }
     fileprivate var stackView = UIStackView()
     
     func enableAlertBox(controllerView: UIView? = nil){
         guard let mainView:UIView = UIApplication.shared.keyWindow ?? controllerView else {return}
+//        AlertBox.shared = AlertBox()
         mainView.addSubview(stackView)
         stackView.axis = .vertical
         stackView.alignment = .fill
@@ -29,29 +33,12 @@ class AlertBox {
         stackView.rightAnchor.constraint(equalTo: mainView.rightAnchor,constant: -20).isActive = true
     }
     
-    //    Setting up Stack View
-    
-    fileprivate func setStackView(controllerView: UIView?){
-        controllerView?.addSubview(stackView)
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        stackView.spacing = 10
-        addStackBackground()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.centerYAnchor.constraint(equalTo: controllerView!.centerYAnchor).isActive = true
-        stackView.leftAnchor.constraint(equalTo: controllerView!.leftAnchor,constant: 20).isActive = true
-        stackView.rightAnchor.constraint(equalTo: controllerView!.rightAnchor,constant: -20).isActive = true
-    }
     
     func addLabel(text:String , fontSize: fontSize){
         let label = UILabel()
         label.text = text
         label.textAlignment = .center
         label.textColor = .white
-        //        label.backgroundColor = .red
-        //        label.layer.cornerRadius = 20
-        //        label.layer.masksToBounds = true
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: CGFloat(fontSize.rawValue))
         stackView.addArrangedSubview(label)
@@ -86,6 +73,8 @@ class AlertBox {
     
     func removeAlertBox(){
         stackView.removeFromSuperview()
+        AlertBox.shared = AlertBox()
+//        stackView.subviews.forEach({stackView.removeArrangedSubview($0)})
     }
 }
 
